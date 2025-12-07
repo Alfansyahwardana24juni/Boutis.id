@@ -11,6 +11,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -19,6 +22,28 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+        /* Custom colors */
+        :root {
+            --boutis-brown: #5A3A31;
+            --boutis-gold: #C6A27E;
+        }
+
+        .text-boutis-brown {
+            color: var(--boutis-brown);
+        }
+
+        .text-boutis-gold {
+            color: var(--boutis-gold);
+        }
+
+        .bg-boutis-brown {
+            background-color: var(--boutis-brown);
+        }
+
+        .bg-boutis-gold {
+            background-color: var(--boutis-gold);
+        }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -118,59 +143,176 @@
         .rotate-icon.active {
             transform: rotate(180deg);
         }
+
+        /* Hero Slideshow */
+        .hero-slideshow {
+            position: relative;
+            overflow: hidden;
+            height: 500px;
+            border-radius: 2.5rem;
+        }
+
+        .hero-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-indicators {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background-color: white;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        /* Animation for slides */
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-up {
+            animation: slideUp 1s ease-out forwards;
+        }
+
+        /* Floating Badges - Smaller Size */
+        .floating-badge {
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+        }
+
+        .floating-badge h3 {
+            font-size: 0.625rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .floating-badge p {
+            font-size: 0.875rem;
+        }
+
+        .floating-badge i {
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-slideshow {
+                height: 300px;
+                border-radius: 1.5rem;
+            }
+
+            .hero-indicators {
+                top: 15px;
+                right: 15px;
+                gap: 8px;
+            }
+
+            .indicator {
+                width: 8px;
+                height: 8px;
+            }
+
+            right: -15px;
+        }
+
+        .floating-badge.quality {
+            bottom: -15px;
+            left: -15px;
+            border-radius: 0.75rem !important;
+        }
+        }
     </style>
 </head>
 
 <body class="bg-white text-gray-800 antialiased">
 
     <!-- Header -->
-    <header id="header" class="sticky-header fixed w-full top-0 z-50 border-b border-gray-100">
-        <nav class="container mx-auto px-4 py-4 transition-all duration-300">
-            <div class="flex items-center justify-between">
-                <a href="#" class="flex items-center gap-2 group">
-                    <div
-                        class="w-10 h-10 bg-[#5A3A31] rounded-full flex items-center justify-center text-white group-hover:bg-[#C6A27E] transition-colors">
-                        <i class="fas fa-shoe-prints"></i>
-                    </div>
-                    <span class="text-2xl font-bold font-serif text-[#5A3A31]">Boutis.id</span>
-                </a>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#home" class="text-gray-700 hover:text-[#5A3A31] font-medium transition relative group">
-                        Home
-                        <span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5A3A31] transition-all group-hover:w-full"></span>
-                    </a>
-                    <a href="#koleksi" class="text-gray-700 hover:text-[#5A3A31] font-medium transition relative group">
-                        Koleksi
-                        <span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5A3A31] transition-all group-hover:w-full"></span>
-                    </a>
-                    <a href="#best-seller"
-                        class="text-gray-700 hover:text-[#5A3A31] font-medium transition relative group">
-                        Best Seller
-                        <span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5A3A31] transition-all group-hover:w-full"></span>
-                    </a>
-                    <a href="#testimoni"
-                        class="text-gray-700 hover:text-[#5A3A31] font-medium transition relative group">
-                        Testimoni
-                        <span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5A3A31] transition-all group-hover:w-full"></span>
-                    </a>
-                    <a href="https://wa.me/6281234567890"
-                        class="px-5 py-2 rounded-full border border-[#5A3A31] text-[#5A3A31] hover:bg-[#5A3A31] hover:text-white transition-all font-medium">
-                        Hubungi Kami
-                    </a>
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-md">
+        <div class="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center group">
+                <div
+                    class="w-10 h-10 rounded-full bg-boutis-brown text-white flex items-center justify-center mr-3 shadow-md group-hover:bg-boutis-gold transition-colors">
+                    <span class="material-icons">shopping_bag</span>
                 </div>
+                <span class="text-2xl font-serif font-bold text-boutis-brown tracking-wide">Boutis.id</span>
+            </a>
 
-                <!-- Mobile Menu Button -->
-                <button id="menu-btn" class="md:hidden text-[#5A3A31] focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-        </nav>
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="text-sm font-medium hover:text-boutis-gold transition-colors relative group">
+                    Home
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-boutis-gold transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#koleksi" class="text-sm font-medium hover:text-boutis-gold transition-colors relative group">
+                    Koleksi
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-boutis-gold transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#best-seller"
+                    class="text-sm font-medium hover:text-boutis-gold transition-colors relative group">
+                    Best Seller
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-boutis-gold transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#testimoni"
+                    class="text-sm font-medium hover:text-boutis-gold transition-colors relative group">
+                    Testimoni
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-boutis-gold transition-all group-hover:w-full"></span>
+                </a>
+            </nav>
+
+            <!-- CTA Button Desktop -->
+            <a href="https://wa.me/6281234567890"
+                class="hidden md:inline-flex items-center px-5 py-2 bg-boutis-brown text-white text-sm font-medium rounded-full hover:bg-boutis-gold transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                Hubungi Kami
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-boutis-brown focus:outline-none">
+                <span class="material-icons text-3xl">menu</span>
+            </button>
+        </div>
     </header>
 
     <!-- Mobile Menu Overlay -->
@@ -178,39 +320,26 @@
         class="fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity duration-300"></div>
 
     <!-- Mobile Menu Drawer -->
-    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 bg-white z-50 mobile-menu shadow-2xl flex flex-col">
-        <div class="p-6 flex justify-between items-center border-b border-gray-100">
-            <span class="text-xl font-serif font-bold text-[#5A3A31]">Menu</span>
-            <button id="close-menu-btn" class="text-gray-400 hover:text-red-500 transition-colors">
-                <i class="fas fa-times text-xl"></i>
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-64 bg-white z-50 mobile-menu shadow-2xl flex flex-col">
+        <div class="p-5 flex justify-between items-center border-b border-gray-100">
+            <span class="text-xl font-serif font-bold text-boutis-brown">Menu</span>
+            <button id="close-menu-btn" class="text-gray-500 hover:text-red-500 transition-colors">
+                <span class="material-icons">close</span>
             </button>
         </div>
-        <div class="flex flex-col p-6 space-y-6">
-            <a href="#home"
-                class="mobile-link text-lg font-medium text-gray-700 hover:text-[#5A3A31] flex items-center gap-3">
-                <i class="fas fa-home w-6"></i> Home
-            </a>
-            <a href="#koleksi"
-                class="mobile-link text-lg font-medium text-gray-700 hover:text-[#5A3A31] flex items-center gap-3">
-                <i class="fas fa-th-large w-6"></i> Koleksi
-            </a>
-            <a href="#best-seller"
-                class="mobile-link text-lg font-medium text-gray-700 hover:text-[#5A3A31] flex items-center gap-3">
-                <i class="fas fa-crown w-6"></i> Best Seller
-            </a>
+        <div class="flex flex-col p-5 space-y-4">
+            <a href="#home" class="mobile-link text-lg font-medium text-gray-700 hover:text-boutis-gold">Home</a>
+            <a href="#koleksi" class="mobile-link text-lg font-medium text-gray-700 hover:text-boutis-gold">Koleksi</a>
+            <a href="#best-seller" class="mobile-link text-lg font-medium text-gray-700 hover:text-boutis-gold">Best
+                Seller</a>
             <a href="#testimoni"
-                class="mobile-link text-lg font-medium text-gray-700 hover:text-[#5A3A31] flex items-center gap-3">
-                <i class="fas fa-comment-alt w-6"></i> Testimoni
-            </a>
-            <a href="#faq"
-                class="mobile-link text-lg font-medium text-gray-700 hover:text-[#5A3A31] flex items-center gap-3">
-                <i class="fas fa-question-circle w-6"></i> FAQ
-            </a>
+                class="mobile-link text-lg font-medium text-gray-700 hover:text-boutis-gold">Testimoni</a>
+            <a href="#kontak" class="mobile-link text-lg font-medium text-gray-700 hover:text-boutis-gold">Kontak</a>
         </div>
-        <div class="mt-auto p-6 bg-gray-50">
+        <div class="mt-auto p-5 bg-gray-50">
             <a href="https://wa.me/6281234567890"
-                class="flex items-center justify-center w-full px-4 py-3 bg-[#5A3A31] text-white rounded-xl hover:bg-[#7A5A51] transition-colors shadow-lg">
-                <i class="fab fa-whatsapp text-lg mr-2"></i> Chat WhatsApp
+                class="flex items-center justify-center w-full px-4 py-3 bg-boutis-brown text-white rounded-lg hover:bg-boutis-gold transition-colors">
+                <span class="material-icons text-sm mr-2">whatsapp</span> Chat WhatsApp
             </a>
         </div>
     </div>
@@ -228,7 +357,7 @@
 
         <div class="container mx-auto px-4 relative z-10">
             <div class="flex flex-col-reverse md:grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
-                <div data-aos="fade-right" data-aos-duration="1000">
+                <div class="w-full" data-aos="fade-right" data-aos-duration="1000">
                     <!-- Trust Badges -->
                     <div class="flex items-center gap-6 mb-8">
                         <div
@@ -239,13 +368,13 @@
                     </div>
 
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-[#5A3A31]">
-                        Fashionable Footwear <br>
+                        Langkah Anggun <br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#5A3A31] to-[#C6A27E]">Wanita
-                            Modern</span>
+                            Berkelas</span>
                     </h1>
                     <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-lg">
-                        Sandal & heels premium, elegan, nyaman, dan terjangkau. Bikin setiap langkah lebih percaya diri
-                        di setiap momen spesialmu.
+                        Temukan koleksi alas kaki premium yang memadukan kenyamanan maksimal dengan desain elegan.
+                        Sempurnakan setiap langkahmu bersama Boutis.id.
                     </p>
 
                     <!-- Feature Highlights -->
@@ -303,52 +432,48 @@
                     </div>
                 </div>
 
-                <div class="relative" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
-                    <!-- Main Image -->
-                    <div class="rounded-[2.5rem] overflow-hidden shadow-2xl relative animate-float">
-                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800"
-                            alt="Fashionable Women's Footwear" class="w-full h-80 md:h-[500px] object-cover">
-                        <!-- Overlay Gradient -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                    </div>
+                <div class="relative w-full" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <!-- Hero Slideshow -->
+                    <div class="hero-slideshow rounded-[2.5rem] overflow-hidden shadow-2xl relative">
+                        <!-- Slide 1 -->
+                        <div class="hero-slide active">
+                            <img src="https://sfile.chatglm.cn/images-ppt/12d7449162d9.jpg" alt="Elegant Black Heels">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                        </div>
 
-                    <!-- Floating Badges -->
-                    <div class="absolute -top-6 -right-6 bg-white px-6 py-4 rounded-2xl shadow-xl border-4 border-[#F5F0EB] animate-bounce"
-                        style="animation-duration: 3s;">
-                        <div class="flex items-center gap-3">
-                            <div
-                                class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-md">
-                                <i class="fas fa-star text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500 font-medium uppercase">Rating</p>
-                                <p class="text-xl font-bold text-[#5A3A31]">4.9/5.0</p>
-                            </div>
+                        <!-- Slide 2 -->
+                        <div class="hero-slide">
+                            <img src="https://sfile.chatglm.cn/images-ppt/f8cac6a0cf8f.jpg" alt="Elegant White Heels">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="hero-slide">
+                            <img src="https://sfile.chatglm.cn/images-ppt/4c826bae2625.jpeg" alt="Stylish Sandals">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                        </div>
+
+                        <!-- Slide 4 -->
+                        <div class="hero-slide">
+                            <img src="https://sfile.chatglm.cn/images-ppt/cff76aa567db.jpg" alt="White Wedges">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                        </div>
+
+                        <!-- Indicators -->
+                        <div class="hero-indicators">
+                            <div class="indicator active" data-slide="0"></div>
+                            <div class="indicator" data-slide="1"></div>
+                            <div class="indicator" data-slide="2"></div>
+                            <div class="indicator" data-slide="3"></div>
                         </div>
                     </div>
+
+
 
                     <div
-                        class="absolute -bottom-6 -left-6 bg-gradient-to-br from-[#5A3A31] to-[#7A5A51] text-white px-8 py-5 rounded-2xl shadow-xl border-4 border-white">
-                        <p class="text-xs font-semibold uppercase tracking-wider mb-1 opacity-80">Premium Quality</p>
+                        class="floating-badge quality absolute -bottom-6 -left-6 bg-gradient-to-br from-[#5A3A31] to-[#7A5A51] text-white px-6 py-2 rounded-2xl shadow-xl border-4 border-white">
+                        <h3 class="text-xs font-semibold uppercase tracking-wider mb-1 opacity-80">Premium Quality</h3>
                         <p class="text-2xl font-bold">100% Original</p>
-                    </div>
-
-                    <!-- Decorative Dots -->
-                    <div class="absolute -z-10 top-10 -right-10 w-32 h-32 opacity-20">
-                        <div class="grid grid-cols-4 gap-3">
-                            <div class="w-3 h-3 rounded-full bg-[#5A3A31]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#5A3A31]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#5A3A31]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#5A3A31]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#5A3A31]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#5A3A31]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#5A3A31]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#5A3A31]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#5A3A31]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#5A3A31]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#5A3A31]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#5A3A31]"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -877,7 +1002,7 @@
             </div>
 
             <div class="border-t border-white/10 pt-8 text-center text-gray-500 text-sm">
-                <p>&copy; 2025 Boutis.id. All Rights Reserved.</p>
+                <p>© 2025 Boutis.id. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -894,12 +1019,12 @@
         });
 
         // Sticky Header
-        const header = document.getElementById('header');
+        const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) {
-                header.classList.add('scrolled');
+                navbar.classList.add('scrolled');
             } else {
-                header.classList.remove('scrolled');
+                navbar.classList.remove('scrolled');
             }
         });
 
@@ -960,6 +1085,60 @@
                         otherIcon.classList.remove('active');
                     }
                 });
+            });
+        });
+
+        // Hero Slideshow
+        const slides = document.querySelectorAll('.hero-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentSlide = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+
+            // Show current slide
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+
+            // Add slide-up animation
+            slides[index].classList.add('slide-up');
+            setTimeout(() => {
+                slides[index].classList.remove('slide-up');
+            }, 1000);
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function startSlideshow() {
+            slideInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
+        }
+
+        function stopSlideshow() {
+            clearInterval(slideInterval);
+        }
+
+        // Initialize slideshow
+        showSlide(0);
+        startSlideshow();
+
+        // Pause slideshow on hover
+        const slideshowContainer = document.querySelector('.hero-slideshow');
+        slideshowContainer.addEventListener('mouseenter', stopSlideshow);
+        slideshowContainer.addEventListener('mouseleave', startSlideshow);
+
+        // Handle indicator clicks
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+                stopSlideshow();
+                startSlideshow();
             });
         });
     </script>
